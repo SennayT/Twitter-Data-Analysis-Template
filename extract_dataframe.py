@@ -42,9 +42,9 @@ class TweetDfExtractor:
     def find_full_text(self)->list:
         text = [x['full_text'] for x in self.tweets_list]
         return text
-       
-    
-    def find_sentiments(self, text)->list:
+
+
+    def find_sentiments(self, text)->(list,list):
         polarity = []
         subjectivity = []
         for t in text:
