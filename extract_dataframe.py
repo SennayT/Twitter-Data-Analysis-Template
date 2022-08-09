@@ -75,10 +75,7 @@ class TweetDfExtractor:
         return friends_count
 
     def is_sensitive(self)->list:
-        try:
-            is_sensitive = [x['possibly_sensitive'] for x in self.tweets_list]
-        except KeyError:
-            is_sensitive = None
+        is_sensitive = [x.get('possibly_sensitive',False) for x in self.tweets_list]
 
         return is_sensitive
 
