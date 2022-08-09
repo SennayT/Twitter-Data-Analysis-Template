@@ -69,8 +69,8 @@ class TestTweetDfExtractor(unittest.TestCase):
         self.assertEqual(
             self.df.find_sentiments(self.df.find_full_text()),
             (
-                <provide a list of the first five sentiment values>,
-                <provide a list of the first five polarity values>,
+                [0.3, 0.0, 0.0, 0.4333333333333333, 0.0],
+                [0.20357142857142857, 0.0, 0.0, 0.7333333333333333, 0.0]
             ),
         )
 
