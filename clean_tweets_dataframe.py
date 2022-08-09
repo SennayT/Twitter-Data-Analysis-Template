@@ -23,13 +23,8 @@ class Clean_Tweets:
         df.drop_duplicates(subset=['original_text'],inplace=True)
         return df
 
-    @staticmethod
-    def parse_date(date:str):
-        date_time_obj = datetime.strptime(date, '%a %b %d %H:%M:%S +0000 %Y')
-        return date_time_obj
-
     def convert_to_datetime(self, df:pd.DataFrame)->pd.DataFrame:
-        df = df['created_at'].apply(self.parse_date)
+        df['created_at'].apply(lambda date : datetime.strptime(date, '%a %b %d %H:%M:%S +0000 %Y'))
         return df
     
     def convert_to_numbers(self, df:pd.DataFrame)->pd.DataFrame:
