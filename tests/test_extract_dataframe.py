@@ -57,7 +57,11 @@ class TestTweetDfExtractor(unittest.TestCase):
         )
 
     def test_find_full_text(self):
-        text = <provide a list of the first five full texts>
+        text = ['#Pelosi airplane landed safely in #Taiwan 🇹🇼  \n1) - Both 🇨🇳 &amp;  🇺🇸 are playing "win win" on financial markets. 2) - Taiwan may be the future Asian   Cuba  3) - 🇺🇸 &amp; 🇨🇳 need an Asian #NATO / #5G\nWhat\'s your thoughts?',
+                'Watch the video of the beginning of the Chinese bombing of Taiwan during Pelosi visit from here : https://t.co/twah6WU4fZ\nــــــــــــــــــــــــــ\n#Pelosi #マツコの知らない世界 #Yediiklim #BadDecisionsTrailer1 #LawnBowls #祝_CALL119_MV900万回 #มากอดกันนะซีพฤกษ์ https://t.co/m4CXfyZRS7',
+                '#Pelosi \n#Taipei \n#taiwan\n#XiJinping \n#China \nOn a verge of another war https://t.co/DuqDiSnWcd',
+                '#HOBIPALOOZA #LaAcademiaExpulsion #WEURO2022 #jhopeAtLollapalooza #SuzukiPakistan #Fantastico #Taiwan #breastfeeding #Kosovo #BORNPINK  strong ✍️💜 https://t.co/GtZeNL24rm',
+                '#Pelosi\n#china\nChina Time ✌️ https://t.co/tEDjzTlszu']
 
         self.assertEqual(self.df.find_full_text(), text)
 
