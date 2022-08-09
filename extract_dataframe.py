@@ -48,7 +48,7 @@ class TweetDfExtractor:
         return polarity, self.subjectivity
 
     def find_created_time(self)->list:
-       
+        created_at = [x['created_at'] for x in tweet_list]
         return created_at
 
     def find_source(self)->list:
