@@ -40,7 +40,7 @@ class TweetDfExtractor:
         return statuses_count
         
     def find_full_text(self)->list:
-        text = [x['full_text'] for x in tweet_list]
+        text = [x['full_text'] for x in self.tweets_list]
         return text
        
     
@@ -49,11 +49,11 @@ class TweetDfExtractor:
         return polarity, self.subjectivity
 
     def find_created_time(self)->list:
-        created_at = [x['created_at'] for x in tweet_list]
+        created_at = [x['created_at'] for x in self.tweets_list]
         return created_at
 
     def find_source(self)->list:
-        source = [x['source'] for x in tweet_list]
+        source = [x['source'] for x in self.tweets_list]
         return source
 
     def find_screen_name(self)->list:
