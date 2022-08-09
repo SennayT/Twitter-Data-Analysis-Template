@@ -80,7 +80,7 @@ class TestTweetDfExtractor(unittest.TestCase):
         self.assertEqual(self.df.find_screen_name(), names)
 
     def test_find_followers_count(self):
-        f_count = <provide a list of the first five follower counts>
+        f_count = [318, 764, 64, 60, 39]
         self.assertEqual(self.df.find_followers_count(), f_count)
 
     def test_find_friends_count(self):
