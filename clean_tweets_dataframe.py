@@ -24,7 +24,7 @@ class Clean_Tweets:
         return df
 
     def convert_to_datetime(self, df:pd.DataFrame)->pd.DataFrame:
-        df['created_at'].apply(lambda date : datetime.strptime(date, '%a %b %d %H:%M:%S +0000 %Y'))
+        df['created_at'] = df['created_at'].apply(lambda date : datetime.strptime(date, '%a %b %d %H:%M:%S +0000 %Y'))
         return df
     
     def convert_to_numbers(self, df:pd.DataFrame)->pd.DataFrame:
