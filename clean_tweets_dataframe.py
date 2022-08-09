@@ -1,5 +1,5 @@
 import pandas as pd
-
+from datetime import datetime
 
 class Clean_Tweets:
     """
@@ -22,16 +22,14 @@ class Clean_Tweets:
     def drop_duplicate(self, df:pd.DataFrame)->pd.DataFrame:
         df.drop_duplicates(subset=['original_text'],inplace=True)
         return df
+
+    @staticmethod
+    def parse_date(date:str):
+        date_time_obj = datetime.strptime(date, '%a %b %d %H:%M:%S +0000 %Y')
+        return date_time_obj
+
     def convert_to_datetime(self, df:pd.DataFrame)->pd.DataFrame:
-        """
-        convert column to datetime
-        """
-        ----
-        
-        ----
-        
-        df = df[df['created_at'] >= '2020-12-31' ]
-        
+        df = df['created_at'].apply(self.parse_date)
         return df
     
     def convert_to_numbers(self, df:pd.DataFrame)->pd.DataFrame:
