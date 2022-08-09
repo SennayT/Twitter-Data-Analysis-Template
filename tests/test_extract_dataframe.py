@@ -91,8 +91,42 @@ class TestTweetDfExtractor(unittest.TestCase):
         self.assertEqual(self.df.is_sensitive(), [False, False, False, False, False])
 
 
-    # def test_find_hashtags(self):
-    #     self.assertEqual(self.df.find_hashtags(), )
+    def test_find_hashtags(self):
+        hashtags = [
+            # item 1
+            [{'text': 'Pelosi', 'indices': [0, 7]},
+             {'text': 'Taiwan', 'indices': [34, 41]},
+             {'text': 'NATO', 'indices': [189, 194]},
+             {'text': '5G', 'indices': [197, 200]}],
+            # item 2
+            [{'text': 'Pelosi', 'indices': [149, 156]},
+             {'text': 'マツコの知らない世界', 'indices': [157, 168]},
+             {'text': 'Yediiklim', 'indices': [169, 179]},
+             {'text': 'BadDecisionsTrailer1', 'indices': [180, 201]},
+             {'text': 'LawnBowls', 'indices': [202, 212]},
+             {'text': '祝_CALL119_MV900万回', 'indices': [213, 231]},
+             {'text': 'มากอดกันนะซีพฤกษ์', 'indices': [232, 250]}],
+            # item 3
+            [{'text': 'Pelosi', 'indices': [0, 7]},
+             {'text': 'Taipei', 'indices': [9, 16]},
+             {'text': 'taiwan', 'indices': [18, 25]},
+             {'text': 'XiJinping', 'indices': [26, 36]},
+             {'text': 'China', 'indices': [38, 44]}],
+            [{'text': 'HOBIPALOOZA', 'indices': [0, 12]},
+             # item 4
+             {'text': 'LaAcademiaExpulsion', 'indices': [13, 33]},
+             {'text': 'WEURO2022', 'indices': [34, 44]},
+             {'text': 'jhopeAtLollapalooza', 'indices': [45, 65]},
+             {'text': 'SuzukiPakistan', 'indices': [66, 81]},
+             {'text': 'Fantastico', 'indices': [82, 93]},
+             {'text': 'Taiwan', 'indices': [94, 101]},
+             {'text': 'breastfeeding', 'indices': [102, 116]},
+             {'text': 'Kosovo', 'indices': [117, 124]},
+             {'text': 'BORNPINK', 'indices': [125, 134]}],
+            # item 5
+            [{'text': 'Pelosi', 'indices': [0, 7]},
+             {'text': 'china', 'indices': [8, 14]}]]
+        self.assertEqual(self.df.find_hashtags(), hashtags)
 
     # def test_find_mentions(self):
     #     self.assertEqual(self.df.find_mentions(), )
