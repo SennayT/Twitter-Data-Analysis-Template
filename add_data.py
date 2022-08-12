@@ -51,4 +51,15 @@ def pre_process(df: pd.DataFrame) -> pd.DataFrame:
     df = cl.convert_to_datetime(df)
     df = cl.remove_non_english_tweets(df)
     df = cl.convert_to_numbers(df)
+
+    drop = ['possibly_sensitive', 'original_text']
+    try:
+        df = df.drop(drop, axis=1)
+        df = df.fillna(0)
+    except KeyError as e:
+        print('key error', e)
+
     return df
+
+
+
