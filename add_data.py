@@ -101,4 +101,3 @@ def fetch_data():
     return pd.DataFrame(res, columns=field_names)
 
 
-insert_tweet_to_table()
