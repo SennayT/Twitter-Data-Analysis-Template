@@ -85,4 +85,17 @@ def insert_tweet_to_table():
     print('data inserted')
 
 
-insert_tweet_to_table()
+def fetch_data():
+    conn, cur = db_connect()
+    cur.execute('SELECT * from TweetInformation')
+    field_names = [i[0] for i in cur.description]
+
+    res = cur.fetchall()
+    nrow = cur.rowcount
+    print(f"{nrow} records fetched from table")
+    cur.close()
+    conn.close()
+    return pd.DataFrame(res, columns=field_names)
+
+
+fetch_data()
