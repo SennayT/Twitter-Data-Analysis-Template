@@ -36,3 +36,11 @@ def create_tables():
     conn.close()
     return
 
+
+def get_df() -> pd.DataFrame:
+    _, tweet_list = read_json("data/global_twitter_data.json")
+    tweets = TweetDfExtractor(tweet_list)
+    df = tweets.get_tweet_df()
+    return df
+
+
