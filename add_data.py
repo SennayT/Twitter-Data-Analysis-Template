@@ -1,3 +1,4 @@
+import json
 import os
 import mysql.connector as mysql
 from mysql.connector import Error
@@ -39,7 +40,7 @@ def create_tables():
 
 
 def get_df() -> pd.DataFrame:
-    _, tweet_list = read_json("data/global_twitter_data.json")
+    _, tweet_list = read_json("tests/sampletweets.json")
     tweets = TweetDfExtractor(tweet_list)
     df = tweets.get_tweet_df()
     return df
@@ -52,7 +53,7 @@ def pre_process(df: pd.DataFrame) -> pd.DataFrame:
     df = cl.remove_non_english_tweets(df)
     df = cl.convert_to_numbers(df)
 
-    drop = ['possibly_sensitive', 'original_text', 'user_mentions', 'hashtags']
+    drop = ['possibly_sensitive', 'original_text', 'user_mentions']
     try:
         df = df.drop(drop, axis=1)
         df = df.fillna(0)
@@ -69,10 +70,12 @@ def insert_tweet_to_table():
     for _, row in df.iterrows():
         sqlQuery = f"""INSERT INTO TweetInformation (created_at, source, polarity, subjectivity, lang,
                         favorite_count, retweet_count, screen_name, original_author, followers_count, friends_count
-                        , place, clean_text)
-                 VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);"""
-        data = (row[0], row[1], row[2], row[3], (row[4]), (row[5]), row[6], row[7], row[8], row[9], row[10], row[11],
-                row[12])
+                        ,hashtags, place, clean_text)
+                 VALUES(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,%s);"""
+        data = (
+            row[0], row[1], row[2], row[3], (row[4]), (row[5]), row[6], row[7], row[8], row[9], row[10],
+            json.dumps(row[11]),
+            row[12], row[13])
 
         try:
             # Execute the SQL command
@@ -98,4 +101,4 @@ def fetch_data():
     return pd.DataFrame(res, columns=field_names)
 
 
-fetch_data()
+insert_tweet_to_table()
