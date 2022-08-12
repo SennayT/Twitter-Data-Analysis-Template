@@ -4,6 +4,7 @@ from mysql.connector import Error
 import pandas as pd
 from extract_dataframe import read_json
 from extract_dataframe import TweetDfExtractor
+from clean_tweets_dataframe import Clean_Tweets
 
 
 def db_connect():
@@ -44,3 +45,10 @@ def get_df() -> pd.DataFrame:
     return df
 
 
+def pre_process(df: pd.DataFrame) -> pd.DataFrame:
+    cl = Clean_Tweets(df)
+    df = cl.clean_tweet_original_text(df)
+    df = cl.convert_to_datetime(df)
+    df = cl.remove_non_english_tweets(df)
+    df = cl.convert_to_numbers(df)
+    return df
