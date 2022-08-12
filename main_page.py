@@ -55,6 +55,8 @@ st.title("Data Display")
 
 st.title("Data Visualizations")
 
+st.header('Tweets by location and language')
+
 select_loc_and_lang()
 
 wordCloud()
