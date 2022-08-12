@@ -40,7 +40,7 @@ def create_tables():
 
 
 def get_df() -> pd.DataFrame:
-    _, tweet_list = read_json("tests/sampletweets.json")
+    _, tweet_list = read_json("data/africa_twitter_data.json")
     tweets = TweetDfExtractor(tweet_list)
     df = tweets.get_tweet_df()
     return df
@@ -67,6 +67,7 @@ def insert_tweet_to_table():
     conn, cur = db_connect()
     df = get_df()
     df = pre_process(df)
+    print('adding..')
     for _, row in df.iterrows():
         sqlQuery = f"""INSERT INTO TweetInformation (created_at, source, polarity, subjectivity, lang,
                         favorite_count, retweet_count, screen_name, original_author, followers_count, friends_count
@@ -101,3 +102,4 @@ def fetch_data():
     return pd.DataFrame(res, columns=field_names)
 
 
+insert_tweet_to_table()
