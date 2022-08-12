@@ -51,18 +51,18 @@ class Clean_Tweets:
         
         return df
 
-    def clean_text(txt):
-        txt = re.sub(r"RT[\s]+", "", txt)
-        txt = txt.replace("\n", " ")
-        txt = re.sub(" +", " ", txt)
-        txt = re.sub(r"https?:\/\/\S+", "", txt)
-        txt = re.sub(r"(@[A-Za-z0–9_]+)|[^\w\s]|#", "", txt)
-        # txt = emoji.replace_emoji(txt, replace='')
-        txt.strip()
-        return txt
 
     def clean_tweet_original_text(self, df: pd.DataFrame) -> pd.DataFrame:
-        df["clean_text"] = df["original_text"].apply(self.clean_text)
+        def clean(txt):
+            txt = re.sub(r"RT[\s]+", "", txt)
+            txt = txt.replace("\n", " ")
+            txt = re.sub(" +", " ", txt)
+            txt = re.sub(r"https?:\/\/\S+", "", txt)
+            txt = re.sub(r"(@[A-Za-z0–9_]+)|[^\w\s]|#", "", txt)
+            # txt = emoji.replace_emoji(txt, replace='')
+            txt.strip()
+            return txt
+        df["clean_text"] = df["original_text"].apply(clean)
         df['clean_text'] = df['clean_text'].astype(str)
         df['clean_text'] = df['clean_text'].apply(lambda x: x.lower())
         df['clean_text'] = df['clean_text'].apply(lambda x: x.translate(str.maketrans(' ', ' ', string.punctuation)))
