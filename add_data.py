@@ -16,3 +16,23 @@ def db_connect():
     )
     cur = conn.cursor()
     return conn, cur
+
+
+def create_tables():
+    conn, cur = db_connect()
+    sql_file = 'day5_schema.sql'
+    fd = open(sql_file, 'r')
+    read_sql_file = fd.read()
+    fd.close()
+
+    commands = read_sql_file.split(';')
+    for command in commands:
+        try:
+            res = cur.execute(command)
+        except Error as ex:
+            print("Command skipped: ", command)
+            print(ex)
+    conn.commit()
+    conn.close()
+    return
+
